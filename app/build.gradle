@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "com.pusher.realtimearchitecture"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:' + rootProject.supportLibraryVersion
+    implementation 'com.android.support.constraint:constraint-layout:' + rootProject.constraintLayoutVersion
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    implementation 'com.android.support:recyclerview-v7:' + rootProject.supportLibraryVersion
+    implementation 'com.android.support:cardview-v7:' + rootProject.supportLibraryVersion
+
+    implementation 'android.arch.lifecycle:extensions:' + rootProject.lifecycleVersion
+    annotationProcessor 'android.arch.lifecycle:compiler:' + rootProject.lifecycleVersion
+
+    implementation 'android.arch.persistence.room:runtime:' + rootProject.roomVersion
+    annotationProcessor 'android.arch.persistence.room:compiler:' + rootProject.roomVersion
+
+    compile 'com.pusher:pusher-java-client:1.5.0'
+
+    implementation 'com.google.dagger:dagger:' + rootProject.daggerVersion
+    annotationProcessor 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
+}
