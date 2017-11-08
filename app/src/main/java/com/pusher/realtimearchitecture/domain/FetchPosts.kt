@@ -15,12 +15,9 @@ import com.pusher.realtimearchitecture.domain.dto.PostItems
 class FetchPosts(val postsRepo: PostsRepository) {
 
     fun execute(): LiveData<PostItems> {
-        return Transformations.map(postsRepo.fetchPosts(), mapModelsToItems())
+        return Transformations.map(postsRepo.fetchPosts(), this::mapModelsToItems)
     }
 
-    private fun mapModelsToItems(): (PostModels) -> PostItems {
-        return { models ->
-            models.map { PostItem(it.title, it.description) }
-        }
-    }
+    private fun mapModelsToItems(models: PostModels)
+            = models.map { PostItem(it.title, it.description) }
 }
